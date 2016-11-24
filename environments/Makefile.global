@@ -3,10 +3,10 @@ include _env.mk
 
 all: plan
 
-init: s3_state remote
+init: plan apply remote
 
 s3_state:
-	terraform plan -var-file=_env.tfvars -out init.plan ../
+	terraform plan -var-file=_env.tfvars -out init.plan
 	terraform apply init.plan
 
 remote:
