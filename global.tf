@@ -15,7 +15,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "availability_zones" {
+variable "aws_availability_zones" {
   default = ["us-east-1c", "us-east-1d", "us-east-1e"]
 }
 
