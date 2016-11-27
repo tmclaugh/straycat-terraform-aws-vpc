@@ -30,7 +30,7 @@ get:
 refresh:
 	terraform refresh -var-file=_env.tfvars
 
-plan: fmt get
+plan: get
 	terraform plan -var-file=_env.tfvars -out proposed.plan
 
 apply:
