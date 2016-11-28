@@ -15,8 +15,10 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+# FIXME: replace hard coding with an aws provider var if I can figure out how
+# to limit the list size.
 variable "aws_availability_zones" {
-  default = ["us-east-1c", "us-east-1d", "us-east-1e"]
+  default = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
 provider "aws" {
