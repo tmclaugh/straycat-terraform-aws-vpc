@@ -22,6 +22,13 @@ output "aws_s3_logs_bucket_arn" {
   value = "${module.aws_logs.bucket_arn}"
 }
 
+output "terraform_state_bucket_arn" {
+  value = "${module.aws_s3_terraform_state.bucket_arn}"
+}
+
+output "terraform_state_bucket_id" {
+  value = "${module.aws_s3_terraform_state.bucket_id}"
+}
 
 output "public_vpc_internet_gateway_id" {
   value = "${module.public_vpc.internet_gateway_id}"
