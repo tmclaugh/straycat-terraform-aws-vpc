@@ -26,8 +26,16 @@ output "subnet_availability_zones" {
   value = ["${aws_subnet.subnet.*.availability_zone}"]
 }
 
+output "subnet_cidr_block_by_availability_zone" {
+  value = "${zipmap(aws_subnet.subnet.*.availability_zone, aws_subnet.subnet.*.cidr_block)}"
+}
+
 output "subnet_ids" {
   value = ["${aws_subnet.subnet.*.id}"]
+}
+
+output "subnet_id_by_availability_zone" {
+  value = "${zipmap(aws_subnet.subnet.*.availability_zone, aws_subnet.subnet.*.id)}"
 }
 
 output "vpc_cidr_block" {

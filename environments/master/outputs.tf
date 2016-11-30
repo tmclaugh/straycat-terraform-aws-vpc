@@ -54,12 +54,20 @@ output "public_vpc_subnet_cidr_blocks" {
   value = ["${module.public_vpc.subnet_cidr_blocks}"]
 }
 
+output "public_vpc_subnet_cidr_block_by_availability_zone" {
+  value = "${module.public_vpc.subnet_cidr_block_by_availability_zone}"
+}
+
 output "public_vpc_subnet_availability_zones" {
   value = ["${module.public_vpc.subnet_availability_zones}"]
 }
 
 output "public_vpc_subnet_ids" {
   value = ["${module.public_vpc.subnet_ids}"]
+}
+
+output "public_vpc_subnet_id_by_availability_zone" {
+  value = "${module.public_vpc.subnet_id_by_availability_zone}"
 }
 
 output "public_vpc_vpc_cidr_block" {
