@@ -30,6 +30,7 @@ module "public_vpc" {
   gateway_enabled = true
   subnet_availability_zones = ["${var.aws_availability_zones}"]
   subnets = ["172.16.0.0/20", "172.16.16.0/20", "172.16.32.0/20"]
+  subnet_map_public_ip = true
   vpc_enable_dns_support = true
   vpc_enable_dns_hostnames = true
   vpc_name = "public"

@@ -21,10 +21,11 @@ resource "aws_internet_gateway" "internet_gateway" {
 }
 
 resource "aws_subnet" "subnet" {
-  count               = "${length(var.subnet_availability_zones)}"
-  vpc_id              = "${aws_vpc.vpc.id}"
-  cidr_block          = "${var.subnets[count.index]}"
-  availability_zone   = "${var.subnet_availability_zones[count.index]}"
+  count                   = "${length(var.subnet_availability_zones)}"
+  vpc_id                  = "${aws_vpc.vpc.id}"
+  cidr_block              = "${var.subnets[count.index]}"
+  availability_zone       = "${var.subnet_availability_zones[count.index]}"
+  map_public_ip_on_launch = "${subnet_map_public_ip}"
 
   tags = {
     Name = "${var.vpc_name}-${var.subnet_availability_zones[count.index]}"
