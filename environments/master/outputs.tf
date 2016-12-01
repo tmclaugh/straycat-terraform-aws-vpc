@@ -30,9 +30,11 @@ output "terraform_state_bucket_id" {
   value = "${module.aws_s3_terraform_state.bucket_id}"
 }
 
+/* FIXME: This is currently not exported because the resource is optional.
 output "public_vpc_internet_gateway_id" {
   value = "${module.public_vpc.internet_gateway_id}"
 }
+*/
 
 output "public_vpc_route_table_id" {
   value = "${module.public_vpc.route_table_id}"

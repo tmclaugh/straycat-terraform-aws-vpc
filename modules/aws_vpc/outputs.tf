@@ -1,6 +1,8 @@
+/* FIXME: This resource is optional
 output "internet_gateway_id" {
   value = "${aws_internet_gateway.internet_gateway.id}"
 }
+*/
 
 output "route_table_id" {
   value = "${aws_route_table.route_table.id}"
