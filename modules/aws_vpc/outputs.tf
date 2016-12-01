@@ -8,17 +8,19 @@ output "route_table_id" {
   value = "${aws_route_table.route_table.id}"
 }
 
-output "route_default_destination_cidr_block" {
-  value = "${aws_route.default.destination_cidr_block}"
+/* FIXME: These resources are optional
+output "route_default_igw_destination_cidr_block" {
+  value = "${aws_route.default_igw.destination_cidr_block}"
 }
 
-output "route_default_gateway_id" {
-  value = "${aws_route.default.gateway_id}"
+output "route_default_igw_gateway_id" {
+  value = "${aws_route.default_igw.gateway_id}"
 }
 
-output "route_default_route_table_id" {
-  value = "${aws_route.default.route_table_id}"
+output "route_default_igw_route_table_id" {
+  value = "${aws_route.default_igw.route_table_id}"
 }
+*/
 
 output "subnet_cidr_blocks" {
   value = ["${aws_subnet.subnet.*.cidr_block}"]

@@ -68,15 +68,16 @@ resource "aws_route_table" "route_table" {
   }
 }
 
-resource "aws_route" "default" {
+resource "aws_route" "default_igw" {
+  count                   = "${var.gateway_enabled}"
   route_table_id          = "${aws_route_table.route_table.id}"
   destination_cidr_block  = "0.0.0.0/0"
   gateway_id              = "${aws_internet_gateway.internet_gateway.id}"
   depends_on              = ["aws_route_table.route_table"]
 }
 
-resource "aws_route_table_association" "route_table_association" {
-  count           = "${length(var.subnet_availability_zones)}"
+resource "aws_route_table_association" "route_table_association_igw" {
+  count           = "${length(var.subnet_availability_zones) * var.gateway_enabled}"
   subnet_id       = "${element(aws_subnet.subnet.*.id, count.index)}"
   route_table_id  = "${aws_route_table.route_table.id}"
 }

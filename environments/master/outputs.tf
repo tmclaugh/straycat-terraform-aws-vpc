@@ -40,17 +40,19 @@ output "public_vpc_route_table_id" {
   value = "${module.public_vpc.route_table_id}"
 }
 
-output "public_vpc_route_default_destination_cidr_block" {
-  value = "${module.public_vpc.route_default_destination_cidr_block}"
+/* FIXME: These resources are currently optional.
+output "public_vpc_route_default_igw_destination_cidr_block" {
+  value = "${module.public_vpc.route_default_igw_destination_cidr_block}"
 }
 
-output "public_vpc_route_default_gateway_id" {
-  value = "${module.public_vpc.route_default_gateway_id}"
+output "public_vpc_route_default_igw_gateway_id" {
+  value = "${module.public_vpc.route_default_igw_gateway_id}"
 }
 
-output "public_vpc_route_default_route_table_id" {
-  value = "${module.public_vpc.route_default_route_table_id}"
+output "public_vpc_route_default_igw_route_table_id" {
+  value = "${module.public_vpc.route_default_igw_route_table_id}"
 }
+*/
 
 output "public_vpc_subnet_cidr_blocks" {
   value = ["${module.public_vpc.subnet_cidr_blocks}"]
