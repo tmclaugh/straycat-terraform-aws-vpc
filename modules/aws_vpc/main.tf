@@ -9,6 +9,32 @@ resource "aws_vpc" "vpc" {
   }
 }
 
+# This is what we consider our default SG, not the SG created by the VPC
+# called "default".
+resource "aws_security_group" "default" {
+  name        = "${var.vpc_name}-default"
+  description = "Standard default SG for VPC ${var.vpc_name}"
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  ingress {
+    from_port = "${var.security_group_default_ingress["from_port"]}"
+    to_port = "${var.security_group_default_ingress["to_port"]}"
+    protocol = "${var.security_group_default_ingress["protocol"]}"
+    self = "${var.security_group_default_ingress["self"]}"
+  }
+  egress {
+    from_port = "${var.security_group_default_egress["from_port"]}"
+    to_port = "${var.security_group_default_egress["to_port"]}"
+    protocol = "${var.security_group_default_egress["protocol"]}"
+    cidr_blocks = ["${var.security_group_default_egress["cidr_blocks"]}"]
+  }
+
+  tags = {
+    Name      = "${var.vpc_name}-default"
+    terraform = "true"
+  }
+}
+
 resource "aws_internet_gateway" "internet_gateway" {
   count = "${var.gateway_enabled}"
 
