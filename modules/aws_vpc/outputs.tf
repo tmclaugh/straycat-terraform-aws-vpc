@@ -1,6 +1,10 @@
-/* FIXME: This resource is optional
+/* FIXME: These resources are optional
 output "internet_gateway_id" {
   value = "${aws_internet_gateway.internet_gateway.id}"
+}
+
+output "nat_gateway_id" {
+  value = "${aws_nat_gateway.nat_gateway.id}"
 }
 */
 
@@ -19,6 +23,18 @@ output "route_default_igw_gateway_id" {
 
 output "route_default_igw_route_table_id" {
   value = "${aws_route.default_igw.route_table_id}"
+}
+
+output "route_default_nat_destination_cidr_block" {
+  value = "${aws_route.default_nat.destination_cidr_block}"
+}
+
+output "route_default_nat_gateway_id" {
+  value = "${aws_route.default_net.gateway_id}"
+}
+
+output "route_default_nat_route_table_id" {
+  value = "${aws_route.default_nat.route_table_id}"
 }
 */
 
