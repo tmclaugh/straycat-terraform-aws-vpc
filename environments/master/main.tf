@@ -35,7 +35,7 @@ module "vpc_private" {
   subnet_availability_zones = ["${var.aws_availability_zones}"]
   subnet_map_public_ip = false
   vpc_enable_dns_support = true
-  vpc_enable_dns_hostnames = true
+  vpc_enable_dns_hostnames = false
   vpc_name = "private"
 }
 
