@@ -14,72 +14,96 @@ output "aws_availability_zones" {
   value = ["${var.aws_availability_zones}"]
 }
 
-output "aws_s3_logs_bucket_id" {
+output "aws_logs.bucket_id" {
   value = "${module.aws_logs.bucket_id}"
 }
 
-output "aws_s3_logs_bucket_arn" {
+output "aws_logs.bucket_arn" {
   value = "${module.aws_logs.bucket_arn}"
 }
 
-output "terraform_state_bucket_arn" {
+output "aws_s3_terraform_state.bucket_arn" {
   value = "${module.aws_s3_terraform_state.bucket_arn}"
 }
 
-output "terraform_state_bucket_id" {
+output "aws_s3_terraform_state.bucket_id" {
   value = "${module.aws_s3_terraform_state.bucket_id}"
 }
 
-/* FIXME: This is currently not exported because the resource is optional.
-output "public_vpc_internet_gateway_id" {
-  value = "${module.public_vpc.internet_gateway_id}"
-}
-*/
 
-output "public_vpc_route_table_id" {
-  value = "${module.public_vpc.route_table_id}"
+# vpc_private
+output "vpc_private.vpc_id" {
+  value = "${module.vpc_private.vpc_id}"
 }
 
-/* FIXME: These resources are currently optional.
-output "public_vpc_route_default_igw_destination_cidr_block" {
-  value = "${module.public_vpc.route_default_igw_destination_cidr_block}"
+output "vpc_private.vpc_name" {
+  value = "${module.vpc_private.vpc_name}"
 }
 
-output "public_vpc_route_default_igw_gateway_id" {
-  value = "${module.public_vpc.route_default_igw_gateway_id}"
+output "vpc_private.vpc_cidr_block" {
+  value = "${module.vpc_private.vpc_cidr_block}"
 }
 
-output "public_vpc_route_default_igw_route_table_id" {
-  value = "${module.public_vpc.route_default_igw_route_table_id}"
-}
-*/
-
-output "public_vpc_subnet_cidr_blocks" {
-  value = ["${module.public_vpc.subnet_cidr_blocks}"]
+output "vpc_private.default_security_group_id" {
+  value = "${module.vpc_private.vpc_default_security_group_id}"
 }
 
-output "public_vpc_subnet_cidr_block_by_availability_zone" {
-  value = "${module.public_vpc.subnet_cidr_block_by_availability_zone}"
+output "vpc_private.subnet_availability_zones_private" {
+  value ="${module.vpc_private.subnet_availability_zones_private}"
 }
 
-output "public_vpc_subnet_availability_zones" {
-  value = ["${module.public_vpc.subnet_availability_zones}"]
+output "vpc_private.subnet_cidr_blocks_private" {
+  value = ["${module.vpc_private.subnet_cidr_blocks_private}"]
 }
 
-output "public_vpc_subnet_ids" {
-  value = ["${module.public_vpc.subnet_ids}"]
+output "vpc_private.subnet_ids_private" {
+  value = ["${module.vpc_private.subnet_ids_private}"]
 }
 
-output "public_vpc_subnet_id_by_availability_zone" {
-  value = "${module.public_vpc.subnet_id_by_availability_zone}"
+output "vpc_private.subnet_id_by_availability_zone_private" {
+  value = "${module.vpc_private.subnet_id_by_availability_zone_private}"
 }
 
-output "public_vpc_vpc_cidr_block" {
-  value = "${module.public_vpc.vpc_cidr_block}"
+output "vpc_private.subnet_cidr_block_by_availability_zone_private" {
+  value = "${module.vpc_private.subnet_cidr_block_by_availability_zone_private}"
 }
 
-output "public_vpc_vpc_id" {
-  value = "${module.public_vpc.vpc_id}"
+
+# vpc_public
+output "vpc_public.vpc_id" {
+  value = "${module.vpc_public.vpc_id}"
+}
+
+output "vpc_public.vpc_name" {
+  value = "${module.vpc_public.vpc_name}"
+}
+
+output "vpc_public.vpc_cidr_block" {
+  value = "${module.vpc_public.vpc_cidr_block}"
+}
+
+output "vpc_public.default_security_group_id" {
+  value = "${module.vpc_public.vpc_default_security_group_id}"
+}
+
+output "vpc_public.subnet_availability_zones_private" {
+  value ="${module.vpc_public.subnet_availability_zones_private}"
+}
+
+output "vpc_public.subnet_cidr_blocks_private" {
+  value = ["${module.vpc_public.subnet_cidr_blocks_private}"]
+}
+
+output "vpc_public.subnet_ids_private" {
+  value = ["${module.vpc_public.subnet_ids_private}"]
+}
+
+output "vpc_public.subnet_id_by_availability_zone_private" {
+  value = "${module.vpc_public.subnet_id_by_availability_zone_private}"
+}
+
+output "vpc_public.subnet_cidr_block_by_availability_zone_private" {
+  value = "${module.vpc_public.subnet_cidr_block_by_availability_zone_private}"
 }
 
 

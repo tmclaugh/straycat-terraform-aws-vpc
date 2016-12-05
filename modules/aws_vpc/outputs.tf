@@ -1,61 +1,9 @@
-/* FIXME: These resources are optional
-output "internet_gateway_id" {
-  value = "${aws_internet_gateway.internet_gateway.id}"
+output "vpc_id" {
+  value = "${aws_vpc.vpc.id}"
 }
 
-output "nat_gateway_id" {
-  value = "${aws_nat_gateway.nat_gateway.id}"
-}
-*/
-
-output "route_table_id" {
-  value = "${aws_route_table.route_table.id}"
-}
-
-/* FIXME: These resources are optional
-output "route_default_igw_destination_cidr_block" {
-  value = "${aws_route.default_igw.destination_cidr_block}"
-}
-
-output "route_default_igw_gateway_id" {
-  value = "${aws_route.default_igw.gateway_id}"
-}
-
-output "route_default_igw_route_table_id" {
-  value = "${aws_route.default_igw.route_table_id}"
-}
-
-output "route_default_nat_destination_cidr_block" {
-  value = "${aws_route.default_nat.destination_cidr_block}"
-}
-
-output "route_default_nat_gateway_id" {
-  value = "${aws_route.default_net.gateway_id}"
-}
-
-output "route_default_nat_route_table_id" {
-  value = "${aws_route.default_nat.route_table_id}"
-}
-*/
-
-output "subnet_cidr_blocks" {
-  value = ["${aws_subnet.subnet.*.cidr_block}"]
-}
-
-output "subnet_availability_zones" {
-  value = ["${aws_subnet.subnet.*.availability_zone}"]
-}
-
-output "subnet_cidr_block_by_availability_zone" {
-  value = "${zipmap(aws_subnet.subnet.*.availability_zone, aws_subnet.subnet.*.cidr_block)}"
-}
-
-output "subnet_ids" {
-  value = ["${aws_subnet.subnet.*.id}"]
-}
-
-output "subnet_id_by_availability_zone" {
-  value = "${zipmap(aws_subnet.subnet.*.availability_zone, aws_subnet.subnet.*.id)}"
+output "vpc_name" {
+  value = "${var.vpc_name}"
 }
 
 output "vpc_cidr_block" {
@@ -68,11 +16,64 @@ output "vpc_default_security_group_id" {
   value ="${aws_security_group.default.id}"
 }
 
-output "vpc_id" {
-  value = "${aws_vpc.vpc.id}"
+
+output "subnet_availability_zones_private" {
+  value = ["${aws_subnet.private.*.availability_zone}"]
 }
 
-output "vpc_name" {
-  value = "${var.vpc_name}"
+output "subnet_cidr_blocks_private" {
+  value = ["${aws_subnet.private.*.cidr_block}"]
+}
+
+output "subnet_ids_private" {
+  value = ["${aws_subnet.private.*.id}"]
+}
+
+output "subnet_id_by_availability_zone_private" {
+  value = "${
+    zipmap(
+      aws_subnet.private.*.availability_zone,
+      aws_subnet.private.*.id
+    )
+  }"
+}
+
+output "subnet_cidr_block_by_availability_zone_private" {
+  value = "${
+    zipmap(
+      aws_subnet.private.*.availability_zone,
+      aws_subnet.private.*.cidr_block
+    )
+  }"
+}
+
+
+output "subnet_availability_zones_public" {
+  value = ["${aws_subnet.public.*.availability_zone}"]
+}
+
+output "subnet_cidr_blocks_public" {
+  value = ["${aws_subnet.public.*.cidr_block}"]
+}
+output "subnet_ids_public" {
+  value = ["${aws_subnet.public.*.id}"]
+}
+
+output "subnet_id_by_availability_zone_public" {
+  value = "${
+    zipmap(
+      aws_subnet.public.*.availability_zone,
+      aws_subnet.public.*.id
+    )
+  }"
+}
+
+output "subnet_cidr_block_by_availability_zone_public" {
+  value = "${
+    zipmap(
+      aws_subnet.public.*.availability_zone,
+      aws_subnet.public.*.cidr_block
+    )
+  }"
 }
 

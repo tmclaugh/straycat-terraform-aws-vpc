@@ -4,7 +4,8 @@ variable "vpc_enable_dns_hostnames" {}
 variable "vpc_enable_dns_support" {}
 variable "gateway_enabled" {}
 variable "nat_enabled" {}
-variable "nat_public_subnets" { default = [] }
+variable "private_subnets" { default = [] }
+variable "public_subnets" { default = [] }
 variable "security_group_default_ingress" {
   default = {
     from_port = 0
@@ -21,6 +22,5 @@ variable "security_group_default_egress" {
     cidr_blocks = "0.0.0.0/0"
   }
 }
-variable "subnets" { default = [] }
 variable "subnet_availability_zones" { default = [] }
 variable "subnet_map_public_ip" {}
