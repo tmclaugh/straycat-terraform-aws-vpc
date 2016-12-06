@@ -68,6 +68,26 @@ output "vpc_private.subnet_cidr_block_by_availability_zone_private" {
   value = "${module.vpc_private.subnet_cidr_block_by_availability_zone_private}"
 }
 
+output "vpc_private.subnet_availability_zones_public" {
+  value ="${module.vpc_private.subnet_availability_zones_public}"
+}
+
+output "vpc_private.subnet_cidr_blocks_public" {
+  value = ["${module.vpc_private.subnet_cidr_blocks_public}"]
+}
+
+output "vpc_private.subnet_ids_public" {
+  value = ["${module.vpc_private.subnet_ids_public}"]
+}
+
+output "vpc_private.subnet_id_by_availability_zone_public" {
+  value = "${module.vpc_private.subnet_id_by_availability_zone_public}"
+}
+
+output "vpc_private.subnet_cidr_block_by_availability_zone_public" {
+  value = "${module.vpc_private.subnet_cidr_block_by_availability_zone_public}"
+}
+
 
 # vpc_public
 output "vpc_public.vpc_id" {
@@ -106,4 +126,23 @@ output "vpc_public.subnet_cidr_block_by_availability_zone_private" {
   value = "${module.vpc_public.subnet_cidr_block_by_availability_zone_private}"
 }
 
+output "vpc_public.subnet_availability_zones_public" {
+  value ="${module.vpc_public.subnet_availability_zones_public}"
+}
+
+output "vpc_public.subnet_cidr_blocks_public" {
+  value = ["${module.vpc_public.subnet_cidr_blocks_public}"]
+}
+
+output "vpc_public.subnet_ids_public" {
+  value = ["${module.vpc_public.subnet_ids_public}"]
+}
+
+output "vpc_public.subnet_id_by_availability_zone_public" {
+  value = "${module.vpc_public.subnet_id_by_availability_zone_public}"
+}
+
+output "vpc_public.subnet_cidr_block_by_availability_zone_public" {
+  value = "${module.vpc_public.subnet_cidr_block_by_availability_zone_public}"
+}
 
