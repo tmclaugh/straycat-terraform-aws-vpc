@@ -16,6 +16,18 @@ output "vpc_default_security_group_id" {
   value ="${aws_security_group.default.id}"
 }
 
+output "route_private_nat_route_table_id" {
+  value = ["${aws_route.private_nat.*.route_table_id}"]
+}
+
+output "route_private_nat_destination_cidr_block_by_route_table_id" {
+  value = "${
+    zipmap(
+      aws_route.private_nat.*.route_table_id,
+      aws_route.private_nat.*.destination_cidr_block
+    )
+  }"
+}
 
 output "subnet_availability_zones_private" {
   value = ["${aws_subnet.private.*.availability_zone}"]
@@ -47,6 +59,19 @@ output "subnet_cidr_block_by_availability_zone_private" {
   }"
 }
 
+
+output "route_public_igw_route_table_id" {
+  value = ["${aws_route.public_igw.*.route_table_id}"]
+}
+
+output "route_public_igw_destination_cidr_block_by_route_table_id" {
+  value = "${
+    zipmap(
+      aws_route.public_igw.*.route_table_id,
+      aws_route.public_igw.*.destination_cidr_block
+    )
+  }"
+}
 
 output "subnet_availability_zones_public" {
   value = ["${aws_subnet.public.*.availability_zone}"]

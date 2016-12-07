@@ -31,6 +31,40 @@ output "aws_s3_terraform_state.bucket_id" {
 }
 
 
+output "vpc_public.route_private_nat_route_table_id" {
+  value = "${module.vpc_public.route_private_nat_route_table_id}"
+}
+
+output "vpc_public.route_private_nat_destination_cidr_block_by_route_table_id" {
+  value = "${module.vpc_public.route_private_nat_destination_cidr_block_by_route_table_id}"
+}
+
+output "vpc_public.route_public_igw_route_table_id" {
+  value = "${module.vpc_public.route_public_igw_route_table_id}"
+}
+
+output "vpc_public.route_public_igw_destination_cidr_block_by_route_table_id" {
+  value = "${module.vpc_public.route_public_igw_destination_cidr_block_by_route_table_id}"
+}
+
+
+output "vpc_private.route_public_igw_route_table_id" {
+  value = "${module.vpc_private.route_public_igw_route_table_id}"
+}
+
+output "vpc_private.route_public_igw_destination_cidr_block_by_route_table_id" {
+  value = "${module.vpc_private.route_public_igw_destination_cidr_block_by_route_table_id}"
+}
+
+output "vpc_private.route_private_nat_route_table_id" {
+  value = "${module.vpc_private.route_private_nat_route_table_id}"
+}
+
+output "vpc_private.route_private_nat_destination_cidr_block_by_route_table_id" {
+  value = "${module.vpc_private.route_private_nat_destination_cidr_block_by_route_table_id}"
+}
+
+
 # vpc_private
 output "vpc_private.vpc_id" {
   value = "${module.vpc_private.vpc_id}"
