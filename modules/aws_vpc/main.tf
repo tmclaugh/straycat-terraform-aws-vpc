@@ -123,14 +123,14 @@ resource "aws_route" "private_nat" {
   depends_on              = ["aws_route_table.private"]
 }
 
-resource "aws_route_table_association" "public_igw" {
+resource "aws_route_table_association" "public" {
   count           = "${length(var.subnet_availability_zones) * var.gateway_enabled}"
   subnet_id       = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id  = "${element(aws_route_table.public.*.id, count.index)}"
 }
 
-resource "aws_route_table_association" "private_nat" {
-  count           = "${length(var.private_subnets) * var.nat_enabled}"
+resource "aws_route_table_association" "private" {
+  count           = "${length(var.private_subnets)}"
   subnet_id       = "${element(aws_subnet.private.*.id, count.index)}"
   route_table_id  = "${element(aws_route_table.private.*.id, count.index)}"
 }
