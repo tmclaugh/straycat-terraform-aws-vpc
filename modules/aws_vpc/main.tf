@@ -124,7 +124,7 @@ resource "aws_route" "private_nat" {
 }
 
 resource "aws_route_table_association" "public" {
-  count           = "${length(var.subnet_availability_zones) * var.gateway_enabled}"
+  count           = "${length(var.public_subnets)}"
   subnet_id       = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id  = "${element(aws_route_table.public.*.id, count.index)}"
 }
