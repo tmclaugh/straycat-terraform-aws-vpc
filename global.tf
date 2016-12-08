@@ -7,6 +7,8 @@ variable "aws_profile" {}
 
 variable "aws_account" {}
 
+variable "aws_account_id" {}
+
 variable "environment" {}
 
 variable "domain" {}
