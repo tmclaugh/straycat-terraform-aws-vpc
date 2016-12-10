@@ -23,3 +23,30 @@ variable "aws_availability_zones" {
   default = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
+
+# VPC setup
+variable "vpc_public_cidr_block" {
+  type = "string"
+  description = "CIDR block fro public VPC"
+}
+
+variable "vpc_public_public_subnets" {
+  type = "list"
+  description = "List of subnet CIDR blocks. Should be as many as there ar AZs used."
+}
+
+variable "vpc_private_cidr_block" {
+  type = "string"
+  description = "CIDR block fro public VPC"
+}
+
+variable "vpc_private_private_subnets" {
+  type = "list"
+  description = "List of subnet CIDR blocks. Should be as many as there ar AZs used."
+}
+
+variable "vpc_private_public_subnets" {
+  type = "list"
+  description = "List of subnet CIDR blocks. NAT gateways will live here with path to internet gateway"
+}
+

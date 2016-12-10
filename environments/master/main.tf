@@ -13,10 +13,10 @@ module "aws_s3_terraform_state" {
 # private_subnet is only set because we can't provide optional outputs.
 module "vpc_public" {
   source = "./modules/aws_vpc"
-  cidr_block = "172.16.0.0/16"
+  cidr_block = "${var.vpc_public_cidr_block}"
   gateway_enabled = true
   nat_enabled = false
-  public_subnets = ["172.16.0.0/20", "172.16.16.0/20", "172.16.32.0/20"]
+  public_subnets = "${var.vpc_public_public_subnets}"
   subnet_availability_zones = ["${var.aws_availability_zones}"]
   subnet_map_public_ip = true
   vpc_enable_dns_support = true
@@ -26,11 +26,11 @@ module "vpc_public" {
 
 module "vpc_private" {
   source = "./modules/aws_vpc"
-  cidr_block = "10.1.0.0/16"
+  cidr_block = "${vpc_private_cidr_block}"
   gateway_enabled = true
   nat_enabled = true
-  private_subnets = ["10.1.0.0/20", "10.1.16.0/20", "10.1.32.0/20"]
-  public_subnets = ["10.1.255.208/28", "10.1.255.224/28", "10.1.255.240/28"]
+  private_subnets = "${var.vpc_private_private_subnets}"
+  public_subnets = "${var.vpc_private_public_subnets}"
   subnet_availability_zones = ["${var.aws_availability_zones}"]
   subnet_map_public_ip = false
   vpc_enable_dns_support = true
