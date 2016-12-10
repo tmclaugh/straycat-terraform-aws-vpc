@@ -23,7 +23,3 @@ variable "aws_availability_zones" {
   default = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
-provider "aws" {
-  profile = "${var.aws_profile}"
-  region  = "${var.aws_region}"
-}
