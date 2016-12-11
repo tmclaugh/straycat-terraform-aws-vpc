@@ -26,7 +26,7 @@ module "vpc_public" {
 
 module "vpc_private" {
   source = "./modules/aws_vpc"
-  cidr_block = "${vpc_private_cidr_block}"
+  cidr_block = "${var.vpc_private_cidr_block}"
   gateway_enabled = true
   nat_enabled = true
   private_subnets = "${var.vpc_private_private_subnets}"
