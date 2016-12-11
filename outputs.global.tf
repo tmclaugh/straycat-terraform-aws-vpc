@@ -164,3 +164,21 @@ output "vpc_public.subnet_cidr_block_by_availability_zone_public" {
   value = "${module.vpc_public.subnet_cidr_block_by_availability_zone_public}"
 }
 
+
+# bastion host
+output "bastion.instance_bastion_id" {
+  value = "${module.bastion.instance_bastion_id}"
+}
+
+output "bastion.instance_public_dns" {
+  value = "${module.bastion.instance_public_dns}"
+}
+
+output "bastion.security_group_bastion" {
+  value = "${module.bastion.security_group_bastion}"
+}
+
+output "bastion.security_group_rule_vpc_allow_bastion_ssh_ids" {
+  value = "${module.bastion.security_group_rule_vpc_allow_bastion_ssh_ids}"
+}
+

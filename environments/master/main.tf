@@ -76,39 +76,22 @@ resource "aws_route" "vpc_peer_public" {
   vpc_peering_connection_id = "${aws_vpc_peering_connection.private_public.id}"
 }
 
-resource "aws_security_group" "public_bastion_ssh" {
-  name        = "${module.vpc_public.vpc_name}-bastion-ssh"
-  description = "public-bastion: allow SSH"
-  vpc_id = "${module.vpc_public.vpc_id}"
+module "bastion" {
+  source            = "./modules/bastion"
+  instance_key_name = "straycat-tmclaugh-threatstack"
+  instance_security_group_id_default = "${module.vpc_public.vpc_default_security_group_id}"
 
-  ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  instance_subnet_id = "${
+    lookup(
+      module.vpc_public.subnet_id_by_availability_zone_public,
+      var.aws_availability_zones[0]
+    )
+  }"
 
-  tags = {
-    Name      = "${module.vpc_public.vpc_name}-bastion-ssh"
-    terraform = "true"
-  }
-}
-
-resource "aws_security_group" "private_bastion_ssh_traffic" {
-  name        = "${module.vpc_private.vpc_name}-bastion-ssh-traffic"
-  description = "private-bastion-traffic: allow SSH from bastion"
-  vpc_id = "${module.vpc_private.vpc_id}"
-
-  ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    security_groups = ["${aws_security_group.public_bastion_ssh.id}"]
-  }
-
-  tags = {
-    Name      = "${module.vpc_private.vpc_name}-bastion-ssh-traffic"
-    terraform = "true"
+  instance_vpc_name             = "${module.vpc_public.vpc_name}"
+  instance_vpc_id               = "${module.vpc_public.vpc_id}"
+  security_group_other_vpc_sgs  = {
+    private = "${module.vpc_private.vpc_default_security_group_id}"
   }
 }
 
