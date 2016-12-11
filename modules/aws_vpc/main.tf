@@ -16,23 +16,30 @@ resource "aws_security_group" "default" {
   description = "Standard default SG for VPC ${var.vpc_name}"
   vpc_id = "${aws_vpc.vpc.id}"
 
-  ingress {
-    from_port = "${var.security_group_default_ingress["from_port"]}"
-    to_port = "${var.security_group_default_ingress["to_port"]}"
-    protocol = "${var.security_group_default_ingress["protocol"]}"
-    self = "${var.security_group_default_ingress["self"]}"
-  }
-  egress {
-    from_port = "${var.security_group_default_egress["from_port"]}"
-    to_port = "${var.security_group_default_egress["to_port"]}"
-    protocol = "${var.security_group_default_egress["protocol"]}"
-    cidr_blocks = ["${var.security_group_default_egress["cidr_blocks"]}"]
-  }
-
   tags = {
     Name      = "${var.vpc_name}-default"
     terraform = "true"
   }
+}
+
+resource "aws_security_group_rule" "default_ssh_ingress" {
+  type                      = "ingress"
+  from_port                 = "${var.security_group_default_ingress["from_port"]}"
+  to_port                   = "${var.security_group_default_ingress["to_port"]}"
+  protocol                  = "${var.security_group_default_ingress["protocol"]}"
+  source_security_group_id  = "${aws_security_group.default.id}"
+  security_group_id         = "${aws_security_group.default.id}"
+
+}
+
+resource "aws_security_group_rule" "default_ssh_egress" {
+  type                      = "egress"
+  from_port                 = "${var.security_group_default_egress["from_port"]}"
+  to_port                   = "${var.security_group_default_egress["to_port"]}"
+  protocol                  = "${var.security_group_default_egress["protocol"]}"
+  cidr_blocks               = ["${var.security_group_default_egress["cidr_blocks"]}"]
+  security_group_id         = "${aws_security_group.default.id}"
+
 }
 
 # NOTE: We're limited to a small number of IGWs per region. Unlike other
