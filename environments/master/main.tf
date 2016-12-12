@@ -38,42 +38,21 @@ module "vpc_private" {
   vpc_name = "private"
 }
 
-resource "aws_vpc_peering_connection" "private_public" {
-  peer_owner_id = "${var.aws_account_id}"
-  peer_vpc_id = "${module.vpc_public.vpc_id}"
-  vpc_id = "${module.vpc_private.vpc_id}"
-  auto_accept = true
+module "vpc_peer_public_private" {
+  source = "./modules/aws_vpc_peer"
 
-  accepter {
-    allow_remote_vpc_dns_resolution = true
-  }
+  cidr_block_local        = "${module.vpc_private.vpc_cidr_block}"
+  route_table_count_local = "${length(var.aws_availability_zones)}"
+  route_table_ids_local   = "${module.vpc_private.route_table_ids_private}"
+  vpc_id_local            = "${module.vpc_private.vpc_id}"
+  vpc_name_local          = "${module.vpc_private.vpc_name}"
 
-  # must be false because we do not to DNS hostnames in the vpc_private
-  requester {
-    allow_remote_vpc_dns_resolution = false
-  }
-
-  tags {
-    Name = "private <-> public"
-    terraform = "true"
-  }
-}
-
-# FIXME: Need better way to get count. Can't set to length of a module's
-# output.  Couldn't depend on an output too for some reason.
-resource "aws_route" "vpc_peer_private" {
-  count                     = "${length(var.aws_availability_zones)}"
-  route_table_id            = "${element(module.vpc_private.route_table_ids_private, count.index)}"
-  destination_cidr_block    = "${module.vpc_public.vpc_cidr_block}"
-  vpc_peering_connection_id = "${aws_vpc_peering_connection.private_public.id}"
-}
-
-
-resource "aws_route" "vpc_peer_public" {
-  count                     = "${length(var.aws_availability_zones)}"
-  route_table_id            = "${element(module.vpc_public.route_table_ids_public, count.index)}"
-  destination_cidr_block    = "${module.vpc_private.vpc_cidr_block}"
-  vpc_peering_connection_id = "${aws_vpc_peering_connection.private_public.id}"
+  cidr_block_peer         = "${module.vpc_public.vpc_cidr_block}"
+  route_table_count_peer  = "${length(var.aws_availability_zones)}"
+  route_table_ids_peer    = "${module.vpc_public.route_table_ids_public}"
+  vpc_id_peer             = "${module.vpc_public.vpc_id}"
+  vpc_name_peer           = "${module.vpc_public.vpc_name}"
+  vpc_owner_id_peer       = "${var.aws_account_id}"
 }
 
 module "bastion" {

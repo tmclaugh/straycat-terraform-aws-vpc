@@ -165,6 +165,15 @@ output "vpc_public.subnet_cidr_block_by_availability_zone_public" {
 }
 
 
+output "vpc_peer_public_private.vpc_peering_connection_id" {
+  value = "${module.vpc_peer_public_private.vpc_peering_connection_id}"
+}
+
+output "vpc_peer_public_private.vpc_peering_connection_accept_status" {
+  value = "${module.vpc_peer_public_private.vpc_peering_connection_accept_status}"
+}
+
+
 # bastion host
 output "bastion.instance_bastion_id" {
   value = "${module.bastion.instance_bastion_id}"
