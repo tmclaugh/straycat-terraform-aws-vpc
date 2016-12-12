@@ -10,7 +10,10 @@ resource "aws_vpc" "vpc" {
 }
 
 # This is what we consider our default SG, not the SG created by the VPC
-# called "default".
+# called "default".  The VPC default SG cannot be deleted and since it's
+# "different" from other SGs we just ignore its existence and don't use it in
+# our environment.  We don't even export its ID from this module.  I also like
+# that when looking at hosts we see an SG of <vpc_name>-default.
 resource "aws_security_group" "default" {
   name        = "${var.vpc_name}-default"
   description = "Standard default SG for VPC ${var.vpc_name}"
@@ -94,6 +97,8 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 
 
+# We don't have a default route table, we have public and private subnet
+# routes.  This is why we do not have a aws_default_route_table resource.
 resource "aws_route_table" "public" {
   count   = "${length(var.public_subnets)}"
   vpc_id  = "${aws_vpc.vpc.id}"
