@@ -55,22 +55,3 @@ module "vpc_peer_public_private" {
   vpc_owner_id_peer       = "${var.aws_account_id}"
 }
 
-module "bastion" {
-  source            = "./modules/bastion"
-  instance_key_name = "straycat-tmclaugh-threatstack"
-  instance_security_group_id_default = "${module.vpc_public.vpc_default_security_group_id}"
-
-  instance_subnet_id = "${
-    lookup(
-      module.vpc_public.subnet_id_by_availability_zone_public,
-      var.aws_availability_zones[0]
-    )
-  }"
-
-  instance_vpc_name             = "${module.vpc_public.vpc_name}"
-  instance_vpc_id               = "${module.vpc_public.vpc_id}"
-  security_group_other_vpc_sgs  = {
-    private = "${module.vpc_private.vpc_default_security_group_id}"
-  }
-}
-
