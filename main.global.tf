@@ -10,7 +10,6 @@ module "aws_s3_terraform_state" {
   versioning     = "true"
 }
 
-# private_subnet is only set because we can't provide optional outputs.
 module "vpc_public" {
   source = "./modules/aws_vpc"
   cidr_block = "${var.vpc_public_cidr_block}"
