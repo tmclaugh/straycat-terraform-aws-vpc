@@ -1,6 +1,19 @@
 /*
 * aws vars for Terraform
 */
+terragrunt = {
+  # Configure Terragrunt to automatically store tfstate files in an S3 bucket
+  remote_state {
+    backend = "s3"
+    config {
+      encrypt = "true"
+      bucket  = "straycat.dhs.org-straycat-terraform"
+      key     = "aws_vpc.tfstate"
+      region  = "us-east-1"
+    }
+  }
+}
+
 aws_profile = "straycat"                # AWS credentials profile name
 aws_account = "straycat"                # AWS account name
 aws_account_id = ""                     # AWS account ID
