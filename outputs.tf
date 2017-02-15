@@ -3,7 +3,7 @@ output "vpc.vpc_id" {
   value = "${module.aws_vpc.vpc_id}",
 }
 
-output "vpc.vpc_names" {
+output "vpc.vpc_name" {
   value = "${module.aws_vpc.vpc_name}",
 }
 
