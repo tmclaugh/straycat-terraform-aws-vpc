@@ -1,19 +1,3 @@
-output "domain" {
-  value = "${var.domain}"
-}
-
-output "environment" {
-  value = "${var.environment}"
-}
-
-output "aws_region" {
-  value = "${var.aws_region}"
-}
-
-output "aws_availability_zones" {
-  value = ["${var.aws_availability_zones}"]
-}
-
 # VPCs
 output "vpc.vpc_id" {
   value = "${module.aws_vpc.vpc_id}",

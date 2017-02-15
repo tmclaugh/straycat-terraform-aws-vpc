@@ -8,6 +8,6 @@ module "aws_vpc" {
   subnet_availability_zones = ["${var.aws_availability_zones}"]
   vpc_enable_dns_support    = true
   vpc_enable_dns_hostnames  = true
-  vpc_name                  = "${var.aws_account}-${var.environment}"
+  vpc_name                  = "${var.aws_account}"
 }
 
