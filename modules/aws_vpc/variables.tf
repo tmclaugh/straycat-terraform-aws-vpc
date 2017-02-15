@@ -23,4 +23,3 @@ variable "security_group_default_egress" {
   }
 }
 variable "subnet_availability_zones" { default = [] }
-variable "subnet_map_public_ip" {}

@@ -8,10 +8,7 @@ domain = "straycat.dhs.org"             # domain name; we prefix S3 buckets with
 environment = "master"                  # Name of our environment
 
 # VPC
-vpc_public_cidr_block       = "172.16.0.0/16"
-vpc_public_public_subnets   = ["172.16.0.0/20", "172.16.16.0/20", "172.16.32.0/20"]
-
-vpc_private_cidr_block      = "10.1.0.0/16"
-vpc_private_private_subnets = ["10.1.0.0/20", "10.1.16.0/20", "10.1.32.0/20"]
-vpc_private_public_subnets  = ["10.1.255.208/28", "10.1.255.224/28", "10.1.255.240/28"]
+vpc_cidr_block      = "10.1.0.0/16"
+vpc_private_subnets = ["10.1.0.0/20", "10.1.16.0/20", "10.1.32.0/20"]
+vpc_public_subnets  = ["10.1.255.0/26", "10.1.255.64/26", "10.1.255.128/26"]
 
