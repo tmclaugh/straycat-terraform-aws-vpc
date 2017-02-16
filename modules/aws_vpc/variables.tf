@@ -11,7 +11,6 @@ variable "security_group_default_ingress_private" {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    self = true
   }
 }
 variable "security_group_default_egress_private" {
@@ -27,7 +26,6 @@ variable "security_group_default_ingress_public" {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    self = true
   }
 }
 variable "security_group_default_egress_public" {
