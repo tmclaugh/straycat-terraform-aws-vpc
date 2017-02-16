@@ -16,6 +16,14 @@ output "vpc_default_security_group_id" {
   value ="${aws_security_group.default.id}"
 }
 
+output "vpc_default_security_group_id_private" {
+  value ="${aws_security_group.default_private.id}"
+}
+
+output "vpc_default_security_group_id_public" {
+  value ="${aws_security_group.default_public.id}"
+}
+
 output "route_table_ids_private" {
   value = ["${aws_route_table.private.*.id}"]
 }

@@ -15,14 +15,21 @@ output "vpc.default_security_group_id" {
   value = "${module.aws_vpc.vpc_default_security_group_id}"
 }
 
-output "vpc.route_table_ids_private" {
-  value = "${module.aws_vpc.route_table_ids_private}"
+output "vpc.default_security_group_id_private" {
+  value = "${module.aws_vpc.vpc_default_security_group_id_private}"
 }
 
-output "vpc.route_table_ids_public" {
-  value = "${module.aws_vpc.route_table_ids_public}"
+output "vpc.default_security_group_id_public" {
+  value = "${module.aws_vpc.vpc_default_security_group_id_public}"
 }
 
+output "vpc.default_security_group_ids" {
+  value = {
+    all ="${module.aws_vpc.vpc_default_security_group_id}"
+    private ="${module.aws_vpc.vpc_default_security_group_id_private}"
+    public ="${module.aws_vpc.vpc_default_security_group_id_public}"
+  }
+}
 
 output "vpc.route_table_ids" {
   value = {

@@ -25,23 +25,65 @@ resource "aws_security_group" "default" {
   }
 }
 
-resource "aws_security_group_rule" "default_ssh_ingress" {
+resource "aws_security_group" "default_private" {
+  name        = "${var.vpc_name}-default-private"
+  description = "Standard default SG for VPC ${var.vpc_name} private subnets"
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  tags = {
+    Name      = "${var.vpc_name}-default-private"
+    terraform = "true"
+  }
+}
+
+resource "aws_security_group" "default_public" {
+  name        = "${var.vpc_name}-default-public"
+  description = "Standard default SG for VPC ${var.vpc_name} public subnets"
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  tags = {
+    Name      = "${var.vpc_name}-default-public"
+    terraform = "true"
+  }
+}
+
+resource "aws_security_group_rule" "default_ssh_ingress_private" {
   type                      = "ingress"
-  from_port                 = "${var.security_group_default_ingress["from_port"]}"
-  to_port                   = "${var.security_group_default_ingress["to_port"]}"
-  protocol                  = "${var.security_group_default_ingress["protocol"]}"
-  source_security_group_id  = "${aws_security_group.default.id}"
-  security_group_id         = "${aws_security_group.default.id}"
+  from_port                 = "${var.security_group_default_ingress_private["from_port"]}"
+  to_port                   = "${var.security_group_default_ingress_private["to_port"]}"
+  protocol                  = "${var.security_group_default_ingress_private["protocol"]}"
+  source_security_group_id  = "${aws_security_group.default_private.id}"
+  security_group_id         = "${aws_security_group.default_private.id}"
 
 }
 
-resource "aws_security_group_rule" "default_ssh_egress" {
+resource "aws_security_group_rule" "default_ssh_egress_private" {
   type                      = "egress"
-  from_port                 = "${var.security_group_default_egress["from_port"]}"
-  to_port                   = "${var.security_group_default_egress["to_port"]}"
-  protocol                  = "${var.security_group_default_egress["protocol"]}"
-  cidr_blocks               = ["${var.security_group_default_egress["cidr_blocks"]}"]
-  security_group_id         = "${aws_security_group.default.id}"
+  from_port                 = "${var.security_group_default_egress_private["from_port"]}"
+  to_port                   = "${var.security_group_default_egress_private["to_port"]}"
+  protocol                  = "${var.security_group_default_egress_private["protocol"]}"
+  cidr_blocks               = ["${var.security_group_default_egress_private["cidr_blocks"]}"]
+  security_group_id         = "${aws_security_group.default_private.id}"
+
+}
+
+resource "aws_security_group_rule" "default_ssh_ingress_public" {
+  type                      = "ingress"
+  from_port                 = "${var.security_group_default_ingress_public["from_port"]}"
+  to_port                   = "${var.security_group_default_ingress_public["to_port"]}"
+  protocol                  = "${var.security_group_default_ingress_public["protocol"]}"
+  source_security_group_id  = "${aws_security_group.default_public.id}"
+  security_group_id         = "${aws_security_group.default_public.id}"
+
+}
+
+resource "aws_security_group_rule" "default_ssh_egress_public" {
+  type                      = "egress"
+  from_port                 = "${var.security_group_default_egress_public["from_port"]}"
+  to_port                   = "${var.security_group_default_egress_public["to_port"]}"
+  protocol                  = "${var.security_group_default_egress_public["protocol"]}"
+  cidr_blocks               = ["${var.security_group_default_egress_public["cidr_blocks"]}"]
+  security_group_id         = "${aws_security_group.default_public.id}"
 
 }
 
