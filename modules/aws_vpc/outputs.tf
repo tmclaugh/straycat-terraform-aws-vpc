@@ -13,7 +13,7 @@ output "vpc_cidr_block" {
 # retrun the SG ID that we consider our default, not the default SG created
 # along with the VPC.
 output "vpc_default_security_group_id" {
-  value ="${aws_security_group.default.id}"
+  value ="${aws_default_security_group.default.id}"
 }
 
 output "vpc_default_security_group_id_private" {

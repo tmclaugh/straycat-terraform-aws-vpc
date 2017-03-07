@@ -9,14 +9,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-# This is what we consider our default SG, not the SG created by the VPC
-# called "default".  The VPC default SG cannot be deleted and since it's
-# "different" from other SGs we just ignore its existence and don't use it in
-# our environment.  We don't even export its ID from this module.  I also like
-# that when looking at hosts we see an SG of <vpc_name>-default.
-resource "aws_security_group" "default" {
-  name        = "${var.vpc_name}-default"
-  description = "Standard default SG for VPC ${var.vpc_name}"
+resource "aws_default_security_group" "default" {
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags = {
@@ -26,8 +19,8 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_security_group" "default_private" {
-  name        = "${var.vpc_name}-default-private"
-  description = "Standard default SG for VPC ${var.vpc_name} private subnets"
+  name        = "default-private"
+  description = "default VPC security group ${var.vpc_name} private subnets"
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags = {
@@ -37,8 +30,8 @@ resource "aws_security_group" "default_private" {
 }
 
 resource "aws_security_group" "default_public" {
-  name        = "${var.vpc_name}-default-public"
-  description = "Standard default SG for VPC ${var.vpc_name} public subnets"
+  name        = "default-public"
+  description = "default VPC security group ${var.vpc_name} public subnets"
   vpc_id = "${aws_vpc.vpc.id}"
 
   tags = {
