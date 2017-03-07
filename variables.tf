@@ -9,8 +9,6 @@ variable "aws_account" {}
 
 variable "aws_account_id" {}
 
-variable "environment" {}
-
 variable "domain" {}
 
 variable "aws_region" {
@@ -25,27 +23,17 @@ variable "aws_availability_zones" {
 
 
 # VPC setup
-variable "vpc_public_cidr_block" {
+variable "vpc_cidr_block" {
   type = "string"
   description = "CIDR block fro public VPC"
 }
 
-variable "vpc_public_public_subnets" {
+variable "vpc_private_subnets" {
   type = "list"
   description = "List of subnet CIDR blocks. Should be as many as there ar AZs used."
 }
 
-variable "vpc_private_cidr_block" {
-  type = "string"
-  description = "CIDR block fro public VPC"
-}
-
-variable "vpc_private_private_subnets" {
-  type = "list"
-  description = "List of subnet CIDR blocks. Should be as many as there ar AZs used."
-}
-
-variable "vpc_private_public_subnets" {
+variable "vpc_public_subnets" {
   type = "list"
   description = "List of subnet CIDR blocks. NAT gateways will live here with path to internet gateway"
 }
