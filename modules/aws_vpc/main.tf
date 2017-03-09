@@ -9,6 +9,8 @@ resource "aws_vpc" "vpc" {
   }
 }
 
+# Due to a bug / behavior of terraform you cannot add a rule to this SG from
+# another resource.
 resource "aws_default_security_group" "default" {
   vpc_id = "${aws_vpc.vpc.id}"
 
