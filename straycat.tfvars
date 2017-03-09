@@ -7,7 +7,7 @@ terragrunt = {
     backend = "s3"
     config {
       encrypt = "true"
-      bucket  = "straycat.dhs.org-straycat-terraform"
+      bucket  = "straycat-dhs-org-straycat-terraform"
       key     = "aws_vpc.tfstate"
       region  = "us-east-1"
     }
@@ -17,7 +17,6 @@ terragrunt = {
 aws_profile = "straycat"                # AWS credentials profile name
 aws_account = "straycat"                # AWS account name
 aws_account_id = ""                     # AWS account ID
-domain = "straycat.dhs.org"             # domain name; we prefix S3 buckets with this
 
 # VPC
 vpc_cidr_block      = "10.1.0.0/16"

@@ -9,8 +9,6 @@ variable "aws_account" {}
 
 variable "aws_account_id" {}
 
-variable "domain" {}
-
 variable "aws_region" {
   default = "us-east-1"
 }
