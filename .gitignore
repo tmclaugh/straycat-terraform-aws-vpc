@@ -3,3 +3,4 @@ environments/*/.terraform/
 environments/*/proposed.plan
 environments/*/terraform.tfstate.backup
 environments/*/tf_outputs.json
+.terraform/
