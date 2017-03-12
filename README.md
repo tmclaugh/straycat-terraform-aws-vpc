@@ -9,3 +9,6 @@ This service requires the following data to create a VPC.
 
 * ___vpc_public_subnets___: This is the list of CIDR blocks that will be public subnets.  Instances in these subnets will get publicly routable addresses.  The length of this list must be the same length as ___aws_availablity_zones___.
 
+* ___private_subnets_allow_all___: Toggle allow all security group rule for private subnets.
+
+* ___public_subnets_allow_all___: Toggle allow all security group rule for public subnets.

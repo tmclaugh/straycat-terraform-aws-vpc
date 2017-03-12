@@ -6,6 +6,9 @@ variable "gateway_enabled" {}
 variable "nat_enabled" {}
 variable "private_subnets" { default = [] }
 variable "public_subnets" { default = [] }
+variable "private_subnets_allow_all" { default = false }
+variable "public_subnets_allow_all" { default = false }
+
 variable "security_group_default_ingress_private" {
   default = {
     from_port = 0

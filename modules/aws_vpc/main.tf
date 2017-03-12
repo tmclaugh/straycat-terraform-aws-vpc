@@ -43,6 +43,7 @@ resource "aws_security_group" "default_public" {
 }
 
 resource "aws_security_group_rule" "default_ssh_ingress_private" {
+  count                     = "${var.private_subnets_allow_all}"
   type                      = "ingress"
   from_port                 = "${var.security_group_default_ingress_private["from_port"]}"
   to_port                   = "${var.security_group_default_ingress_private["to_port"]}"
@@ -63,6 +64,7 @@ resource "aws_security_group_rule" "default_ssh_egress_private" {
 }
 
 resource "aws_security_group_rule" "default_ssh_ingress_public" {
+  count                     = "${var.public_subnets_allow_all}"
   type                      = "ingress"
   from_port                 = "${var.security_group_default_ingress_public["from_port"]}"
   to_port                   = "${var.security_group_default_ingress_public["to_port"]}"

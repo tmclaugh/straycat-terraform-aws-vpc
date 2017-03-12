@@ -36,3 +36,10 @@ variable "vpc_public_subnets" {
   description = "List of subnet CIDR blocks. NAT gateways will live here with path to internet gateway"
 }
 
+variable "private_subnets_allow_all" {
+  description = "Whether to allow all traffic to all hosts inside the private subnets"
+}
+
+variable "public_subnets_allow_all" {
+  description = "Whether to allow all traffic to all hosts inside the public subnets"
+}
